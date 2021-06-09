@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Basisc</title>
+    <script src="https://unpkg.com/vue@3.0.11"></script>
+
+    <style>
+        li, p{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .post{
+            width: 300px;
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 20px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+        .fav{
+            background-color: #da2d75;
+        }
+        li img{
+            width: 300px;
+            border-radius: 20px;
+            box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+        }
+        .comment-box{
+            margin: 0;
+            padding: 0;
+            width: 250px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+            }
+        .comment{
+            background-color: #fff;
+            padding: 2px 5px;
+            border-radius: 5px;
+            box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+            margin: 5px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Vue Basics</h1>
+    
+    <div id="app">
+        <ul>
+            <li v-for="movie in movies">
+                <div :class="{ post: !movie.isFav}">
+                    <img :src="movie.img" alt="img here">
+                    <h3>{{ movie.title }} - Likes {{ movie.likes }}</h3>
+                    <div>
+                        <button @click="movie.likes--"> Dislike </button>
+                        <button @click="movie.likes++"> Like </button>
+                        <button @click="toggleFavorites(movie)">
+                            <span v-if="movie.isFav">Remove Favorite</span>
+                            <span v-if="!movie.isFav">Add Favorite</span>
+                        </button>
+                    </div>
+                    <br>
+                    <button v-if="movie.comments.length" @click="toggleComments(movie)">
+                        <span v-if="movie.showComments">Hide Comments</span>
+                        <span v-if="!movie.showComments">Show Comments</span>
+                    </button>
+                    <div v-if="movie.showComments">
+                        <ul class="comment-box">
+                            <li v-for="cmnt in movie.comments" class="comment">
+                                <p>{{ cmnt }}</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <input type="text" v-model="movie.comment" placeholder="comment here">
+                        <button @click="addComment(movie)">Send</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
