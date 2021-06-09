@@ -13,6 +13,7 @@ const app = Vue.createApp({
             if(movie.comment){
                 movie.comments.push(movie.comment)
                 movie.showComments = true
+                movie.comment = ''
             }
         },
         toggleFavorites(movie){

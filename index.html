@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vue Basisc</title>
+    <title>Vue Basics</title>
     <script src="https://unpkg.com/vue@3.0.11"></script>
 
     <style>
@@ -30,8 +30,16 @@
             border-radius: 20px;
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         }
-        .fav{
+        .post-fav{
+            width: 300px;
             background-color: #da2d75;
+            padding: 20px;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 20px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         }
         li img{
             width: 300px;
@@ -64,12 +72,12 @@
     <div id="app">
         <ul>
             <li v-for="movie in movies">
-                <div :class="{ post: !movie.isFav}">
+                <div :class="movie.isFav ? 'post-fav':'post'">
                     <img :src="movie.img" alt="img here">
                     <h3>{{ movie.title }} - Likes {{ movie.likes }}</h3>
                     <div>
-                        <button @click="movie.likes--"> Dislike </button>
                         <button @click="movie.likes++"> Like </button>
+                        <button @click="movie.likes--"> Dislike </button>
                         <button @click="toggleFavorites(movie)">
                             <span v-if="movie.isFav">Remove Favorite</span>
                             <span v-if="!movie.isFav">Add Favorite</span>
