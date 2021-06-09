@@ -86,7 +86,7 @@
                     <br>
                     <button v-if="movie.comments.length" @click="toggleComments(movie)">
                         <span v-if="movie.showComments">Hide Comments</span>
-                        <span v-if="!movie.showComments">Show Comments</span>
+                        <span v-else>Show Comments</span>
                     </button>
                     <div v-if="movie.showComments">
                         <ul class="comment-box">
